@@ -2,6 +2,8 @@
 
 ## Requirements
 - Node 21
+- JDK 17
+- Android emulator (incluido con Android Studio)
 
 ## Instalación
 
@@ -11,7 +13,7 @@ cd PlayBeat
 npm start
 ```
 
-Utilizar 
+En caso de errores utilizar
 ```
 npx react-native doctor
 ```
