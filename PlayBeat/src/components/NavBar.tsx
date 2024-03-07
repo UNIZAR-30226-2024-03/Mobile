@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Image, StyleSheet, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 
 type NavBarProps = {
     navigation: any,
@@ -7,22 +8,40 @@ type NavBarProps = {
 }
 
 export const NavBar = ({ navigation, title } : NavBarProps): React.JSX.Element => {
+    const [toggled, setToggling] = useState(false);
+    const [query, setQuery] = useState("");
     const openMenu = () => {
         navigation.openDrawer();
     }
     return (
         <View style={styles.header}>
             <TouchableOpacity onPress={openMenu}  >
-                <Image source={require('../assets/images/menu-outline.png')} style={styles.toggleSideBar} />
+                <Image source={require('../assets/images/menu-outline.png')} style={commonStyles.headerIcon} />
             </TouchableOpacity>
             <Image source={require('../assets/images/logo_blanco.png')} style={styles.logo} />
-            <TouchableOpacity onPress={openMenu}  >
-                <Image source={require('../assets/images/search-outline.png')} style={{...styles.toggleSideBar}} />
-            </TouchableOpacity>
+            {
+                toggled? 
+                    <TextInput style={styles.searchInput} onChangeText={setQuery} value={query} textAlignVertical="bottom" /> 
+                        :  
+                    <TouchableOpacity onPress={() => setToggling(true)}  >
+                        <Image source={require('../assets/images/search-outline.png')} style={commonStyles.headerIcon} />
+                    </TouchableOpacity>
+            }
         </View>
         
     )
 }
+
+const commonStyles = StyleSheet.create({
+    headerIcon: {
+        backgroundColor: "white",
+        borderRadius: 5,
+        width: 30,
+        height: 30,
+        margin: 10,
+      },
+})
+
 const styles = StyleSheet.create({
 
     header: {
@@ -30,7 +49,7 @@ const styles = StyleSheet.create({
         height: 60,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         backgroundColor: "#000"
       },
       headerTitle: {
@@ -48,11 +67,11 @@ const styles = StyleSheet.create({
         width: 50,
         height: '100%',
       },
-      toggleSideBar: {
-        backgroundColor: "white",
-        borderRadius: 5,
-        width: 30,
-        height: 30
+      
+      searchInput: {
+        ...commonStyles.headerIcon,
+        width: 200,
+        lineHeight: 1
       }
 
 })
