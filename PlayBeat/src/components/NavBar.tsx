@@ -1,3 +1,12 @@
+/**
+ * PlayBeat - Global Track Player
+ * Team: Barbara H. Liskov 03
+ * UNIZAR-30226-2024-03 
+ *
+ * Common NavBar for every screen in the application
+ * 
+ */
+
 import { useState } from 'react';
 import { Image, StyleSheet, Text, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
