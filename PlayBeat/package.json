@@ -7,12 +7,20 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "documentation": "typedoc --out ./docs/documentation ./src --tsconfig ./tsconfig.json"
   },
   "dependencies": {
+    "@react-navigation/drawer": "^6.6.11",
+    "@react-navigation/native": "^6.1.14",
+    "@react-navigation/native-stack": "^6.9.22",
     "@react-native-google-signin/google-signin": "^11.0.0",
     "react": "18.2.0",
-    "react-native": "0.73.5"
+    "react-native": "0.73.5",
+    "react-native-gesture-handler": "^2.15.0",
+    "react-native-reanimated": "^3.7.2",
+    "react-native-safe-area-context": "^4.9.0",
+    "react-native-screens": "^3.29.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -29,6 +37,7 @@
     "jest": "^29.6.3",
     "prettier": "2.8.8",
     "react-test-renderer": "18.2.0",
+    "typedoc": "^0.25.11",
     "typescript": "5.0.4"
   },
   "engines": {
