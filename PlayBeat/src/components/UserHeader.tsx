@@ -33,7 +33,7 @@ export const UserHeader = (uhp: UserHeaderProps) => {
                 <Text>{uhp.uinfo.name}</Text>
             </View>
             <View style={styles.midcol}>
-                <Image source={require('../assets/images/person.png')} style={styles.logo} ></Image>
+                <Image source={require('../assets/icons/person.png')} style={styles.logo} ></Image>
                 <Text>{String(uhp.uinfo.noFollowers)} followers </Text>
             </View>
             <View style={styles.lastcol}>

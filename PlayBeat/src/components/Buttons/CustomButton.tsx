@@ -8,7 +8,7 @@
  */
 
 import { Button, GestureResponderEvent } from "react-native"
-import { UserScreenMode } from "../../constants/types"
+import { AppColorPalette, UserScreenMode } from "../../constants/types"
 
 /**
  * @field `mode` refer to {@link UserScreenMode}
@@ -37,15 +37,15 @@ type ButtonModeResult = {
 const buttonModeColorPalette = (mode: UserScreenMode): ButtonModeResult => {
     switch (mode) {
         case UserScreenMode.PUBLIC: {
-            return { title: 'SEGUIR', color: "#6985C0"}
+            return { title: 'SEGUIR', color: AppColorPalette.mainBlue}
             break;
         }
         case UserScreenMode.LOCAL: {
-            return  { title: 'EDITAR', color: "#DE5555"}
+            return  { title: 'EDITAR', color: AppColorPalette.red}
             break;
         }
         case UserScreenMode.EDIT: {
-            return { title: 'GUARDAR', color: "#239411"}
+            return { title: 'GUARDAR', color: AppColorPalette.green}
             break;
         }
 

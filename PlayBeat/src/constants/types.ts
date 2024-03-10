@@ -10,7 +10,9 @@ export enum UserScreenMode {
 }
 
 export const AppColorPalette = {
-    'lightBlue': '#98AED5',
-    'mainBlue': '#6985C0',
-    'ultraLightBlue': '#CDD6EA'
+    lightBlue: '#98AED5',
+    mainBlue: '#6985C0',
+    ultraLightBlue: '#CDD6EA',
+    red: '#DE5555',
+    green: '#239411',
 }

@@ -26,19 +26,19 @@ export function AppDrawer() {
         }} />
         <Drawer.Group  screenOptions={{ header: (props) => <NavBar title='' {...props} /> }} >
           <Drawer.Screen name="Explore" component={ExploreScreen} options={{
-              drawerIcon: () => <Image source={require('../assets/images/compass-outline.png')} style={styles.logo} />
+              drawerIcon: () => <Image source={require('../assets/icons/compass-outline.png')} style={styles.logo} />
           }} />
           <Drawer.Screen name="Friends" component={ExploreScreen} options={{
-              drawerIcon: () => <Image source={require('../assets/images/people-outline.png')} style={styles.logo} />
+              drawerIcon: () => <Image source={require('../assets/icons/people-outline.png')} style={styles.logo} />
           }} />
           <Drawer.Screen name="Upload" component={ExploreScreen} options={{
-              drawerIcon: () => <Image source={require('../assets/images/cloud-upload-outline.png')} style={styles.logo} />
+              drawerIcon: () => <Image source={require('../assets/icons/cloud-upload-outline.png')} style={styles.logo} />
           }} />
           <Drawer.Screen name="Settings" component={ExploreScreen} options={{
-              drawerIcon: () => <Image source={require('../assets/images/cog-outline.png')} style={styles.logo} />
+              drawerIcon: () => <Image source={require('../assets/icons/cog-outline.png')} style={styles.logo} />
           }} />
           <Drawer.Screen name="Library" component={ExploreScreen} options={{
-              drawerIcon: () => <Image source={require('../assets/images/library-outline.png')} style={styles.logo} />
+              drawerIcon: () => <Image source={require('../assets/icons/library-outline.png')} style={styles.logo} />
           }} />
         </Drawer.Group>
         
