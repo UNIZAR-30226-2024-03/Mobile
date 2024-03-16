@@ -7,9 +7,12 @@
  * 
  */
 
-import { AppColorPalette } from "../constants/types"
+import { AppColorPalette, menuOptionType } from "../constants/types"
 import { Image, StyleSheet, Text, View } from "react-native"
 import { PlayButton } from "./Buttons/PlayButton"
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler"
+import { useState } from "react"
+import OptionsList from "./OptionsList"
 
 /**
  * @field `name` - Playlist's name
@@ -47,13 +50,42 @@ const PublicIcons = () => {
     )
 }
 
+const menuOptionsActions: menuOptionType[] = [
+    {
+        title: "Add to queue",
+        color: AppColorPalette.white,
+        action: () => null
+    },
+    {
+        title: "Edit details",
+        color: AppColorPalette.white,
+        action: () => null
+    },
+    {
+        title: "Invite collaborators",
+        color: AppColorPalette.white,
+        action: () => null
+    },
+    {
+        title: "Make private",
+        color: AppColorPalette.white,
+        action: () => null
+    },
+    {
+        title: "Delete playlist",
+        color: AppColorPalette.red,
+        action: () => null
+    },
+
+]
+
 /**
  * Renders a header for a playlist
  * @param uhp refer to {@link PlaylistHeaderProps }
  * @returns 
  */
-export const PlaylistHeader = (uhp: PlaylistHeaderProps) => {
-
+export default function PlaylistHeader(uhp: PlaylistHeaderProps) {
+    //const [menuOpen, setMenuOpen] = useState(false);
     const copyLinkToClipboard = () => {
 
     }
@@ -80,7 +112,6 @@ export const PlaylistHeader = (uhp: PlaylistHeaderProps) => {
                 </View>
                 <View style={styles.playListActions}>
                     <Image style={styles.icon} source={require('../assets/icons/shuffle-outline.png')} ></Image>
-                    <Image style={styles.icon} source={require('../assets/icons/ellipsis-horizontal.png')} ></Image>
                 </View>
             </View>
         </View>

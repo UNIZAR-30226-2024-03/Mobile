@@ -8,8 +8,8 @@
  */
 
 import { useState } from 'react';
-import { Image, StyleSheet, Text, View } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { Image, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
+import { AppColorPalette } from '../constants/types';
 
 /**
  * @field `navigation` - navigation object
@@ -25,7 +25,7 @@ type NavBarProps = {
  * @param nbp refer to {@link NavBarProps} 
  * @returns 
  */
-export const NavBar = (nbp : NavBarProps): React.JSX.Element => {
+export default function NavBar (nbp : NavBarProps): React.JSX.Element {
     const [toggled, setToggling] = useState(false);
     const [query, setQuery] = useState("");
     const openMenu = () => {
@@ -33,9 +33,6 @@ export const NavBar = (nbp : NavBarProps): React.JSX.Element => {
     }
     return (
         <View style={styles.header}>
-            <TouchableOpacity onPress={openMenu}  >
-                <Image source={require('../assets/icons/menu-outline.png')} style={commonStyles.headerIcon} />
-            </TouchableOpacity>
             <Image source={require('../assets/images/logo_blanco.png')} style={styles.logo} />
             {
                 toggled? 
@@ -68,7 +65,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "#000"
+        backgroundColor: AppColorPalette.black,
+        paddingHorizontal: 20
       },
       headerTitle: {
         flexDirection: "row",

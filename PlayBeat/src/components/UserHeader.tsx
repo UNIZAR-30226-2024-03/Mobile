@@ -23,7 +23,7 @@ type UserHeaderProps = {
     mode: UserScreenMode
 }
 
-export const UserHeader = (uhp: UserHeaderProps) => {
+export default function UserHeader(uhp: UserHeaderProps) {
 
 
     return (

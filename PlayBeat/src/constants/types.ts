@@ -15,4 +15,14 @@ export const AppColorPalette = {
     ultraLightBlue: '#CDD6EA',
     red: '#DE5555',
     green: '#239411',
+    white: '#FFFFFF',
+    mainGray: '#4A4A4A',
+    black: '#000000'
+}
+
+
+export type menuOptionType = {
+    title: string,
+    color: string,
+    action: () => any
 }
