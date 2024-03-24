@@ -4,6 +4,7 @@ import { AppColorPalette, UserScreenMode } from "../constants/types";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PlaylistHeader from "../components/PlaylistHeader";
 import { FloatingAction } from "react-native-floating-action";
+import MovableFlatlist from "../components/MovableFlatlist";
 
 
 const actions = [
@@ -33,6 +34,87 @@ const actions = [
     }
   ];
 
+
+  const contained_info = [
+    {
+      index: "title",
+      elements: [
+        (
+          <Text>Testing</Text>
+        ),
+        (
+          <Text>Testing jaja</Text>
+        )
+      ]
+    },
+    {
+      index: "title2",
+      elements: [
+        (
+          <Text>Testing2</Text>
+        ),
+        (
+          <Text>Testing jaja2</Text>
+        )
+      ]
+    },
+    {
+      index: "title3",
+      elements: [
+        (
+          <Text>Testing3</Text>
+        ),
+        (
+          <Text>Testing jaja2</Text>
+        )
+      ]
+    },
+    {
+      index: "title4",
+      elements: [
+        (
+          <Text>Testing4</Text>
+        ),
+        (
+          <Text>Testing jaja2</Text>
+        )
+      ]
+    },
+    {
+      index: "title5",
+      elements: [
+        (
+          <Text>Testing5</Text>
+        ),
+        (
+          <Text>Testing jaja2</Text>
+        )
+      ]
+    },
+    {
+      index: "title6",
+      elements: [
+        (
+          <Text>Testing6</Text>
+        ),
+        (
+          <Text>Testing jaja2</Text>
+        )
+      ]
+    },
+    {
+      index: "title7",
+      elements: [
+        (
+          <Text>Testing7</Text>
+        ),
+        (
+          <Text>Testing jaja2</Text>
+        )
+      ]
+    }
+  ]
+
 export const ExploreScreen = () => {
     const doThing = (name?: string) => {
         console.log(`selected button: ${name}`);
@@ -42,8 +124,9 @@ export const ExploreScreen = () => {
             <View style={{flex: 2}} >
                 <PlaylistHeader pinfo={{ name: 'Playlist 1', numSongs: 20, duration: 60, profilePicture: '../assets/icons/person.png', isPublic: true}} />
             </View>
-            <View style={{flex: 2, backgroundColor: 'red'}} />
-            <View style={{flex: 3, backgroundColor: 'black'}} />
+            <View style={{ flex: 6 }}>
+              <MovableFlatlist movable={true} contained_info={contained_info} />
+            </View>
             <FloatingAction
               floatingIcon={require('../assets/icons/ellipsis-horizontal.png')}
               actions={actions}
