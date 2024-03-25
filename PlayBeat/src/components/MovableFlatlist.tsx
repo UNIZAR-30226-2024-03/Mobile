@@ -6,23 +6,37 @@
  * Generic Flatlist holding generic placeholders that can also be movable.
  * 
  */
-import { useReducer, useState } from "react"
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { useState } from "react"
+import { StyleSheet, View } from "react-native"
 import DragList, { DragListRenderItemInfo } from "react-native-draglist"
 import GenericPlaceholder from "./GenericPlaceholder"
 import { PlaceholderElements } from "../constants/types"
+import { PopupMenuItemType } from "./types/GenericPopupMenuTypes"
 
-type Position = {
-    top: number,
-    left: number,
-    right: number,
-    bottom: number,
-}
 
-const toggleSongActionMenu = (position: Position ) => {
-    
-}
 
+const popupInfo: PopupMenuItemType[] = [
+    {
+        text: "Add to queue",
+        action: () => null
+    },
+    {
+        text: "Remove from this playlist",
+        action: () => null
+    },
+    {
+        text: "Add to playlist",
+        action: () => null
+    },
+    {
+        text: "Go to album",
+        action: () => null
+    },
+    {
+        text: "Go to artist",
+        action: () => null
+    }
+]
 
 export default function MovableFlatlist({
     movable,
@@ -38,7 +52,7 @@ export default function MovableFlatlist({
     }
     
     const renderItem = (info: DragListRenderItemInfo<PlaceholderElements>) => {
-        return <GenericPlaceholder movable={true} dragInfo={info}/>
+        return <GenericPlaceholder movable={true} dragInfo={info} popupInfo={popupInfo} />
     }
 
     async function onReordered(fromIndex: number, toIndex: number) {

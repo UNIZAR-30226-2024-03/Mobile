@@ -12,19 +12,19 @@ import { AppColorPalette, PlaceholderElements } from "../constants/types";
 import { GestureHandlerRootView, TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { DragListRenderItemInfo } from "react-native-draglist"
 import { useState } from "react";
+import GenericPopupMenu from "./GenericPopupMenu";
+import { PopupMenuItemType } from "./types/GenericPopupMenuTypes";
 
-const Divider = (props:any) => {
-    return (
-        <View style={{ backgroundColor: "black", height: 1, ...props }} />
-    )
-}
+
 
 export default function GenericPlaceholder({
     movable,
     dragInfo,
+    popupInfo
 }: {
     movable: boolean,
     dragInfo: DragListRenderItemInfo<PlaceholderElements>,
+    popupInfo: PopupMenuItemType[]
 }) {
 
     
@@ -32,7 +32,7 @@ export default function GenericPlaceholder({
     const {item, onDragStart, onDragEnd, isActive} = dragInfo;
     const [modalVisibility, setModalVisibility] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [modalViewHeight, setModalViewHeight] = useState<LayoutRectangle>({height: 10000, x: 0, y: 0, width: 0});
+    
     return (
         <GestureHandlerRootView>
             <View style={styles.main} >
@@ -55,39 +55,7 @@ export default function GenericPlaceholder({
                         ref={ref =>  {ref?.measureInWindow((x, y) => setPosition({x, y}))}} 
                         />
                 </TouchableOpacity>
-                <Modal
-                    transparent={true}
-                    animationType="fade"
-                    visible={modalVisibility}>
-                    <View style={{...styles.modalView, 
-                        top: Math.min(Dimensions.get("window").height - modalViewHeight.height - 50, position.y), 
-                        left: Dimensions.get("window").width - 2* modalViewHeight.width}}
-                        onLayout={({nativeEvent}) => setModalViewHeight(nativeEvent.layout)} >
-                        <Pressable onPress={() => null} style={styles.menuItem} >
-                            <Text>Add to queue</Text>
-                        </Pressable>
-                        <Divider props={{ width: "100%" }} />
-                        <Pressable onPress={() => null} style={styles.menuItem} >
-                            <Text>Remove from this playlist</Text>
-                        </Pressable>
-                        <Divider props={{ width: "100%" }} />
-                        <Pressable onPress={() => null} style={styles.menuItem} >
-                            <Text>Add to playlist</Text>
-                        </Pressable>
-                        <Divider props={{ width: "100%" }} />
-                        <Pressable onPress={() => null} style={styles.menuItem} >
-                            <Text>Go to album</Text>
-                        </Pressable>
-                        <Divider props={{ width: "100%" }} />
-                        <Pressable onPress={() => null} style={styles.menuItem} >
-                            <Text>Go to artist</Text>
-                        </Pressable>
-                        <Divider props={{ width: "100%" }} />
-                        <Pressable onPress={() => setModalVisibility(false)}>
-                            <Text>Close</Text>
-                        </Pressable>
-                    </View>
-                </Modal>
+                <GenericPopupMenu visible={modalVisibility} setVisibility={setModalVisibility} coord={position} items={popupInfo}/> 
             </View>
         </GestureHandlerRootView>
     )
@@ -119,18 +87,6 @@ const styles = StyleSheet.create({
         zIndex: 2,
         width: "50%"
     },
-    modalView: {
-        justifyContent: "center",
-        flexDirection: "column",
-        alignSelf: "center",
-        padding: 5,
-        backgroundColor: AppColorPalette.ultraLightBlue,
-        color: AppColorPalette.black,
-        borderColor: AppColorPalette.white,
-        borderWidth: 2,
-        borderRadius: 20
-    },
-    menuItem: {
-        padding: 4
-    }
+    
+    
 })
