@@ -17,3 +17,5 @@ En caso de errores utilizar
 ```
 npx react-native doctor
 ```
+
+A la hora de hacer el build, si se quiere generar la aplicación de IOS revisar -> https://github.com/oblador/react-native-vector-icons
