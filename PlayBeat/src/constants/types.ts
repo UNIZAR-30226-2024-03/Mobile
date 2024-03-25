@@ -21,13 +21,13 @@ export const AppColorPalette = {
 }
 
 
-export type menuOptionType = {
+export interface menuOptionType {
     title: string,
     color: string,
     action: () => any
 }
 
-export type PlaceholderElements = {
+export interface PlaceholderElements {
     index: string,
     elements: React.JSX.Element[]
 }

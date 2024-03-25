@@ -1,13 +1,18 @@
-import { LayoutRectangle } from "react-native"
+import { QueueActions } from "../../utils/QueueActions"
+import { PlaylistActions } from "../../utils/PlaylistActions"
+import { RoutingActions } from "../../utils/RoutingActions"
 
-export type PopupMenuItemType = {
+export type ActionType = QueueActions | PlaylistActions | RoutingActions
+
+export interface PopupMenuItemType {
     text: string,
-    action: () => any
+    actionKey: ActionType
 }
 
-export type GenericPopupMenuProps = {
+export interface GenericPopupMenuProps {
     items: PopupMenuItemType[],
     visible: boolean, 
     setVisibility: any,
-    coord: { x: number, y: number }
+    coord: { x: number, y: number },
+    dispatchCustomAction: (actionKey: ActionType) => any
 }

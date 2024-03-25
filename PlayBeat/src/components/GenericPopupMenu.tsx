@@ -19,7 +19,7 @@ const Divider = (props:any) => {
     )
 }
 
-export default function GenericPopupMenu({items, visible, setVisibility, coord}: GenericPopupMenuProps) {
+export default function GenericPopupMenu({items, visible, setVisibility, coord, dispatchCustomAction}: GenericPopupMenuProps) {
     const [modalViewHeight, setModalViewHeight] = useState<LayoutRectangle>({height: 10000, x: 0, y: 0, width: 0});
     return (
         <Modal
@@ -33,7 +33,7 @@ export default function GenericPopupMenu({items, visible, setVisibility, coord}:
                 {
                     items.map((item: PopupMenuItemType) => (
                         <View style={styles.menuItem} >
-                            <Pressable onPress={() => item.action}  >
+                            <Pressable onPress={() => { dispatchCustomAction(item.actionKey); setVisibility(false)}} >
                                 <Text>{ item.text }</Text>
                             </Pressable>
                             <Divider props={{ width: "100%" }} />

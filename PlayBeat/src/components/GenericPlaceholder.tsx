@@ -13,18 +13,20 @@ import { GestureHandlerRootView, TouchableOpacity, TouchableWithoutFeedback } fr
 import { DragListRenderItemInfo } from "react-native-draglist"
 import { useState } from "react";
 import GenericPopupMenu from "./GenericPopupMenu";
-import { PopupMenuItemType } from "./types/GenericPopupMenuTypes";
+import { ActionType, PopupMenuItemType } from "./types/GenericPopupMenuTypes";
 
 
 
 export default function GenericPlaceholder({
     movable,
     dragInfo,
-    popupInfo
+    popupInfo,
+    dispatchActionOnItem
 }: {
     movable: boolean,
     dragInfo: DragListRenderItemInfo<PlaceholderElements>,
-    popupInfo: PopupMenuItemType[]
+    popupInfo: PopupMenuItemType[],
+    dispatchActionOnItem: any
 }) {
 
     
@@ -32,6 +34,11 @@ export default function GenericPlaceholder({
     const {item, onDragStart, onDragEnd, isActive} = dragInfo;
     const [modalVisibility, setModalVisibility] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    const dispatchAction = (actionKey: ActionType) => {
+        console.log("Dispatching action: " + actionKey.toString() + " on " + item.index)
+        dispatchActionOnItem(actionKey, item)
+    }
     
     return (
         <GestureHandlerRootView>
@@ -55,7 +62,12 @@ export default function GenericPlaceholder({
                         ref={ref =>  {ref?.measureInWindow((x, y) => setPosition({x, y}))}} 
                         />
                 </TouchableOpacity>
-                <GenericPopupMenu visible={modalVisibility} setVisibility={setModalVisibility} coord={position} items={popupInfo}/> 
+                <GenericPopupMenu 
+                    visible={modalVisibility} 
+                    setVisibility={setModalVisibility} 
+                    coord={position} 
+                    items={popupInfo}
+                    dispatchCustomAction={dispatchAction}/> 
             </View>
         </GestureHandlerRootView>
     )

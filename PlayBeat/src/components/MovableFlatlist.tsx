@@ -6,45 +6,23 @@
  * Generic Flatlist holding generic placeholders that can also be movable.
  * 
  */
-import { useState } from "react"
+import { Context, useContext, useState } from "react"
 import { StyleSheet, View } from "react-native"
 import DragList, { DragListRenderItemInfo } from "react-native-draglist"
 import GenericPlaceholder from "./GenericPlaceholder"
 import { PlaceholderElements } from "../constants/types"
-import { PopupMenuItemType } from "./types/GenericPopupMenuTypes"
-
-
-
-const popupInfo: PopupMenuItemType[] = [
-    {
-        text: "Add to queue",
-        action: () => null
-    },
-    {
-        text: "Remove from this playlist",
-        action: () => null
-    },
-    {
-        text: "Add to playlist",
-        action: () => null
-    },
-    {
-        text: "Go to album",
-        action: () => null
-    },
-    {
-        text: "Go to artist",
-        action: () => null
-    }
-]
+import { songPopupMenu } from "../utils/SongPopupMenu"
 
 export default function MovableFlatlist({
     movable,
-    contained_info
+    ctx,
+    dispatchActionOnItem
 }: {
     movable: boolean,
-    contained_info: PlaceholderElements[]
+    ctx: Context<any>,
+    dispatchActionOnItem: any
 }) {
+    const { contained_info } = useContext(ctx)
     const [data, setData] = useState(contained_info)
 
     const keyExtractor = (pe: PlaceholderElements) => {
@@ -52,7 +30,7 @@ export default function MovableFlatlist({
     }
     
     const renderItem = (info: DragListRenderItemInfo<PlaceholderElements>) => {
-        return <GenericPlaceholder movable={true} dragInfo={info} popupInfo={popupInfo} />
+        return <GenericPlaceholder movable={true} dragInfo={info} popupInfo={songPopupMenu} dispatchActionOnItem={dispatchActionOnItem} />
     }
 
     async function onReordered(fromIndex: number, toIndex: number) {
