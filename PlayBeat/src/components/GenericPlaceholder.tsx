@@ -7,14 +7,14 @@
  * 
  */
 
-import { Image, LayoutRectangle, Modal, Pressable, StyleSheet, Text, View, Dimensions } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import { AppColorPalette, PlaceholderElements } from "../constants/types";
 import { GestureHandlerRootView, TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { DragListRenderItemInfo } from "react-native-draglist"
 import { useState } from "react";
 import GenericPopupMenu from "./GenericPopupMenu";
 import { ActionType, PopupMenuItemType } from "./types/GenericPopupMenuTypes";
-
+import Icon from 'react-native-vector-icons/Ionicons'
 
 
 export default function GenericPlaceholder({
@@ -48,15 +48,18 @@ export default function GenericPlaceholder({
                         <TouchableOpacity
                         key={item.index}
                         onPressIn={onDragStart}
-                        onPressOut={onDragEnd}>
-                            <Image style={styles.icon} source={require('../assets/icons/move-outline.png')} />
+                        onPressOut={onDragEnd}
+                        useNativeAnimations={true}
+                        >
+                        
+                            <Icon name="move-outline" color={AppColorPalette.black} size={35} style={styles.icon}  />
                         </TouchableOpacity>
                     
                 ) }
                 { item.elements.map((v, i, a) => v) }
                 <TouchableOpacity onPress={() => setModalVisibility(true)} >
                     <Image 
-                        style={styles.icon} 
+                        style={{ width: 35, height: 35, marginHorizontal: 20 }} 
                         source={require('../assets/icons/ellipsis-horizontal.png')} 
                         // measureInWindow considers the whole Window, including scrollable items
                         ref={ref =>  {ref?.measureInWindow((x, y) => setPosition({x, y}))}} 
@@ -88,8 +91,6 @@ const styles = StyleSheet.create({
 
     },
     icon: {
-        width: 35,
-        height: 35,
         marginHorizontal: 20,
     },
     menuContainer: {

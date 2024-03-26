@@ -1,4 +1,5 @@
 export enum RoutingActions {
     ToAlbum,
-    ToArtist
+    ToArtist,
+    ToPlaylistDetails
 }

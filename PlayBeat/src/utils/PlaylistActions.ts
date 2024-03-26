@@ -1,4 +1,7 @@
 export enum PlaylistActions {
     AddSong,
-    RemoveSong
+    RemoveSong,
+    Delete,
+    TurnPublic,
+    Void
 }

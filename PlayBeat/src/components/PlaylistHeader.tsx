@@ -8,11 +8,9 @@
  */
 
 import { AppColorPalette, menuOptionType } from "../constants/types"
-import { Image, StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import { PlayButton } from "./Buttons/PlayButton"
-import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler"
-import { useState } from "react"
-import OptionsList from "./OptionsList"
+import Icon from 'react-native-vector-icons/Ionicons'
 
 /**
  * @field `name` - Playlist's name
@@ -43,41 +41,12 @@ type PlaylistHeaderProps = {
 const PublicIcons = () => {
     return (
         <View style={styles.iconsRow}>
-            <Image style={styles.icon} source={require('../assets/icons/lock-open-outline.png')} ></Image>
-            <Image style={styles.icon} source={require('../assets/icons/link.png')} ></Image>
-            <Image style={styles.icon} source={require('../assets/icons/people-outline.png')} ></Image>
+            <Icon name="lock-open-outline" color={AppColorPalette.mainBlue} size={35} style={styles.icon} />
+            <Icon name="link" color={AppColorPalette.mainBlue} size={35} style={styles.icon} />
+            <Icon name="people-outline" color={AppColorPalette.mainBlue} size={35} style={styles.icon}  />
         </View>
     )
 }
-
-const menuOptionsActions: menuOptionType[] = [
-    {
-        title: "Add to queue",
-        color: AppColorPalette.white,
-        action: () => null
-    },
-    {
-        title: "Edit details",
-        color: AppColorPalette.white,
-        action: () => null
-    },
-    {
-        title: "Invite collaborators",
-        color: AppColorPalette.white,
-        action: () => null
-    },
-    {
-        title: "Make private",
-        color: AppColorPalette.white,
-        action: () => null
-    },
-    {
-        title: "Delete playlist",
-        color: AppColorPalette.red,
-        action: () => null
-    },
-
-]
 
 /**
  * Renders a header for a playlist
@@ -98,20 +67,20 @@ export default function PlaylistHeader(uhp: PlaylistHeaderProps) {
         <View style={styles.header} >
             <View style={styles.fstcol} >
                 <PlayButton />
-                <Image style={styles.image} source={require('../assets/icons/person.png')} ></Image>
+                <Icon name="person" size={50} />
             </View>
             <View style={styles.sndcol}>
                 <View style={styles.playListDescription}>
                     {
                             uhp.pinfo.isPublic ? 
                                 <PublicIcons /> : 
-                                <Image style={styles.icon} source={require('../assets/icons/lock-closed-outline.png')} ></Image>
+                                <Icon name="lock-closed-outline" size={35} color={AppColorPalette.mainBlue} />
                     }
                     <Text style={{ fontSize: 20 }} >{uhp.pinfo.name}</Text>
                     <Text >{uhp.pinfo.numSongs} canciones | {uhp.pinfo.duration} minutos</Text>
                 </View>
                 <View style={styles.playListActions}>
-                    <Image style={styles.icon} source={require('../assets/icons/shuffle-outline.png')} ></Image>
+                    <Icon name="shuffle-outline" size={35} color={AppColorPalette.mainBlue} />
                 </View>
             </View>
         </View>
@@ -143,8 +112,6 @@ const styles = StyleSheet.create({
         height: 50,
     },
     icon: {
-        width: 35,
-        height: 35,
         marginHorizontal: 20,
     },
     playListDescription: {

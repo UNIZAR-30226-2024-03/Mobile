@@ -7,31 +7,34 @@ import { Reducer, createContext, useReducer } from "react";
 import { PlaylistActions } from "../utils/PlaylistActions";
 import { ActionType } from "../components/types/GenericPopupMenuTypes";
 import { createCustomContext } from "../utils/CreateContext";
+import { QueueActions } from "../utils/QueueActions";
+import { RoutingActions } from "../utils/RoutingActions";
+import Icon from "react-native-vector-icons/Ionicons"
 
 
 const actions = [
   {
-    text: "Accessibility",
-    name: "bt_accessibility",
-    position: 2,
+    text: "Add to Queue",
+    name: "add_to_queue",
+    position: 1,
     buttonSize: 0,
   },
   {
-    text: "Language",
-    icon: require("../assets/icons/cog-outline.png"),
-    name: "bt_language",
-    position: 1
+    text: "Edit details",
+    icon: <Icon name="cog-outline" />,
+    name: "edit_details",
+    position: 2
   },
   {
-    text: "Location",
-    icon: require("../assets/icons/cog-outline.png"),
-    name: "bt_room",
+    text: "Make public",
+    icon: <Icon name="cog-outline" />,
+    name: "make_public",
     position: 3
   },
   {
-    text: "Video",
-    icon: require("../assets/icons/cog-outline.png"),
-    name: "bt_videocam",
+    text: "Delete Playlist",
+    icon: <Icon name="cog-outline" />,
+    name: "delete_playlist",
     position: 4
   }
 ];
@@ -119,15 +122,34 @@ const actions = [
 
 
 
-const handlePlaylistActions: Reducer<{data : PlaceholderElements[]}, {type: ActionType, on: PlaceholderElements}> = (state, action) => {
-  if (action.type == PlaylistActions.RemoveSong) {
-    console.log(state.data)
-    return {
-      data: state.data.filter(({index}) => index != action.on.index)
+const handlePlaylistActions: Reducer<{data : PlaceholderElements[]}, {type: ActionType, on?: PlaceholderElements}> = (state, action) => {
+  let applyOn = action.on ?? state.data[0]
+  switch (action.type) {
+    case PlaylistActions.RemoveSong: {
+      // fully remove song from playlist
+      return {
+        data: state.data.filter(({index}) => index != applyOn.index)
+      }
     }
-  }
-  return {
-    data: state.data.filter(({index}) => index != action.on.index)
+    case PlaylistActions.AddSong: {
+      // save screen state
+      // capture the song somehow
+      // go to user's playlist screen
+      // Add song to a playlist selected by the user
+      // recover state
+    }
+    case QueueActions.AddSong: {
+      // add song to queue
+    }
+    case RoutingActions.ToAlbum: {
+      // go to the album the song has been published in
+    }
+    case RoutingActions.ToArtist: {
+      // go to the artist who published the song
+    }
+    default: {
+      return state
+    }
   }
 }
 
@@ -137,15 +159,13 @@ export const ExploreScreen = () => {
         console.log(`selected button: ${name}`);
     }
 
-    // get playlist info
-
     const [playlistState, playlistReducer] = useReducer(handlePlaylistActions, { data: contained_info })
     const PlaylistContext = createCustomContext(null)
 
     return (
         <View style={{flex:1}}>
             <View style={{flex: 2}} >
-                <PlaylistHeader pinfo={{ name: 'Playlist 1', numSongs: 20, duration: 60, profilePicture: '../assets/icons/person.png', isPublic: true}} />
+                <PlaylistHeader pinfo={{ name: 'Playlist 1', numSongs: playlistState.data.length, duration: 60, profilePicture: '../assets/icons/person.png', isPublic: true}} />
             </View>
             <View style={{ flex: 6 }}>
               <PlaylistContext.Provider value={{ contained_info: playlistState.data }}>
@@ -156,12 +176,30 @@ export const ExploreScreen = () => {
               </PlaylistContext.Provider>
             </View>
             <FloatingAction
-              floatingIcon={require('../assets/icons/ellipsis-horizontal.png')}
+              floatingIcon={<Icon name="ellipsis-horizontal" size={35} />}
               actions={actions}
-              iconHeight={35}
-              iconWidth={35}
               color={AppColorPalette.lightBlue}
-              onPressItem={doThing}
+              onPressItem={(name?: string) => {
+                let action: ActionType;
+                switch (name) {
+                  case "add_to_queue": {
+                    action = QueueActions.AddSong
+                  }
+                  case "edit_details": {
+                    action = RoutingActions.ToPlaylistDetails
+                  }
+                  case "make_public": {
+                    action = PlaylistActions.TurnPublic
+                  }
+                  case "delete_playlist": {
+                    action = PlaylistActions.Delete
+                  }
+                  default: {
+                    action = PlaylistActions.Void
+                  }
+                }
+                playlistReducer({ type: action })
+              }}
             />
         </View>
     )

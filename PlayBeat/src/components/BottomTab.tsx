@@ -8,35 +8,24 @@
  */
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
-import LogInScreen from '../screens/LogInScreen';
 import { ExploreScreen } from '../screens/Explore';
 import NavBar from './NavBar';
+import { AppColorPalette } from '../constants/types';
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export default function BottomTab() {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator initialRouteName='Explore' screenOptions={{ header: (props) => <NavBar title='' {...props} /> }}>
         <Tab.Screen name="Explore" component={ExploreScreen} options={{
-            tabBarIcon: (p) => <Image source={require('../assets/icons/compass-outline.png')} style={styles.logo} />,
+            tabBarIcon: (p) => <Icon name="compass-outline" color={AppColorPalette.black} size={35}  />,
         }} />
         <Tab.Screen name="Friends" component={ExploreScreen} options={{
-            tabBarIcon: (p) => <Image source={require('../assets/icons/people-outline.png')} style={styles.logo} />,
+            tabBarIcon: (p) => <Icon name="people-outline" color={AppColorPalette.black} size={35}  />,
         }} />
         <Tab.Screen name="Library" component={ExploreScreen} options={{
-            tabBarIcon: (p) => <Image source={require('../assets/icons/library-outline.png')} style={styles.logo} />,
+            tabBarIcon: (p) => <Icon name="library-outline" color={AppColorPalette.black} size={35}  />,
         }} />
     </Tab.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  logo: {
-      width: 35,
-      height: 35,
-  },
-  screenView: {
-    flex: 1,
-    flexDirection: "column"
-  }
-})
