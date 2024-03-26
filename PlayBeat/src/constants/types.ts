@@ -17,12 +17,17 @@ export const AppColorPalette = {
     green: '#239411',
     white: '#FFFFFF',
     mainGray: '#4A4A4A',
-    black: '#000000'
+    black: '#242423'
 }
 
 
-export type menuOptionType = {
+export interface menuOptionType {
     title: string,
     color: string,
     action: () => any
+}
+
+export interface PlaceholderElements {
+    index: string,
+    elements: React.JSX.Element[]
 }

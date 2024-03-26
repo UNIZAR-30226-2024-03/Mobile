@@ -10,6 +10,7 @@
 import { useState } from 'react';
 import { Image, StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
 import { AppColorPalette } from '../constants/types';
+import Icon from 'react-native-vector-icons/Ionicons'
 
 /**
  * @field `navigation` - navigation object
@@ -39,7 +40,7 @@ export default function NavBar (nbp : NavBarProps): React.JSX.Element {
                     <TextInput style={styles.searchInput} onChangeText={setQuery} value={query} textAlignVertical="bottom" /> 
                         :  
                     <TouchableOpacity onPress={() => setToggling(true)}  >
-                        <Image source={require('../assets/icons/search-outline.png')} style={commonStyles.headerIcon} />
+                        <Icon name="search-outline" color={AppColorPalette.black} size={35} style={commonStyles.headerIcon}  />
                     </TouchableOpacity>
             }
         </View>
@@ -51,8 +52,6 @@ const commonStyles = StyleSheet.create({
     headerIcon: {
         backgroundColor: "white",
         borderRadius: 5,
-        width: 30,
-        height: 30,
         margin: 10,
       },
 })

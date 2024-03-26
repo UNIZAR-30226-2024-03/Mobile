@@ -10,6 +10,7 @@
 import { CustomButton } from "./Buttons/CustomButton"
 import { AppColorPalette, UserScreenMode } from "../constants/types"
 import { Image, StyleSheet, Text, View } from "react-native"
+import Icon from 'react-native-vector-icons/Ionicons'
 
 type UserInfo = {
     name: string, 
@@ -33,7 +34,7 @@ export default function UserHeader(uhp: UserHeaderProps) {
                 <Text>{uhp.uinfo.name}</Text>
             </View>
             <View style={styles.midcol}>
-                <Image source={require('../assets/icons/person.png')} style={styles.logo} ></Image>
+                <Icon name="person" color={AppColorPalette.black} size={50} />
                 <Text>{String(uhp.uinfo.noFollowers)} followers </Text>
             </View>
             <View style={styles.lastcol}>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         height: '100%',
-        backgroundColor: AppColorPalette.lightBlue,
+        backgroundColor: AppColorPalette.ultraLightBlue,
         paddingHorizontal: 20,
     },
     fstcol: {
